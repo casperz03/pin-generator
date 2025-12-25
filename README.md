@@ -5,6 +5,8 @@
 
 Projekt **pin-generator** służy do generowania specyficznego ciągu znaków na bazie podanych parametrów z wykorzystaniem biblioteki Crypto.
 
+Projekt **pin-generator** służy do generowania specyficznego kodu alfanumerycznego znaków na bazie podanych parametrów z wykorzystaniem biblioteki Crypto.
+
 <!--
 TODO:
 - rozwinąć opis projektu,
@@ -12,4 +14,14 @@ TODO:
 - dopisać o inspiracji oficjalnymi systemami,
 - rozwinąć wątek bezpieczeństwa i losowości,
 - rozpisać format (syntax) tego numeru,
+-->
+
+<!--
+PIN:
+[P][][][][][][][][][K]
+- ma składać się z 10 znaków
+- pierwszy, zawsze jest M/K oznaczający płeć
+-
+- PIN pod spodem ma również generować UUID dla dziecka, które to dziecko w sensie liczba ile się urodziło już czy coś(?) i czas rejestracji, data i godzina!
+
 -->
