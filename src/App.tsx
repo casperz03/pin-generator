@@ -4,6 +4,14 @@ function App() {
 
 	const maxDate = today.toISOString().split("T")[0];
 
+	const PIN = () => {
+		const A = Math.random();
+		const B = 111;
+		return `${A}${B}`;
+	};
+
+	console.log(PIN())
+
 	return (
 		<>
 			<form id="pin-form">
