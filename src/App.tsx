@@ -8,16 +8,29 @@ function App() {
 		e.preventDefault();
 
 		const PIN = () => {
-			// do każdej litery przypisywać funkcję i stworzyć cyfrę kontrolną, zrobić research czemu e.target.name działa
-			const A = e.target.gender.value === "male" ? "M" : "F";
-			const B = e.target.birthDate.value.slice(2).replaceAll("-", "");
-			const C = randomHexByte();
-			const D = "A";
+			// stworzyć cyfrę kontrolną, zrobić research czemu e.target.name działa, zmienić getRandomHexByte() tak żeby generował 3 znaki / wg. README
+			// zrobić generowanie UUID jako id/key
+			const A = getGender();
+			const B = getBirthDate();
+			const C = getRandomHexByte();
+			const D = getCheckDigit();
 
-			function randomHexByte() {
+			function getGender() {
+				return e.target.gender.value === "male" ? "M" : "F";
+			}
+
+			function getBirthDate() {
+				return e.target.birthDate.value.slice(2).replaceAll("-", "");
+			}
+
+			function getRandomHexByte() {
 				const array = new Uint8Array(1);
 				crypto.getRandomValues(array);
 				return array[0].toString(16).padStart(2, "0");
+			}
+
+			function getCheckDigit() {
+				return "A";
 			}
 
 			return `${A}_${B}_${C}_${D}`;
