@@ -7,12 +7,17 @@ function App() {
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
 
+		// if (e.target.name.includes(" ")) {
+		// 	console.log("Nie można używać spacji w imieniu i nazwisku");
+		// 	return;
+		// }
+		// console.log(e.target.name.value);
+
 		const PIN = () => {
-			// stworzyć cyfrę kontrolną, zrobić research czemu e.target.name działa, zmienić getRandomHexByte() tak żeby generował 3 znaki / wg. README
-			// zrobić generowanie UUID jako id/key
+			// przeanalizować cały kod
 			const A = getGender();
 			const B = getBirthDate();
-			const C = getRandomHexByte();
+			const C = getRandomNumber();
 			const D = getCheckDigit();
 
 			function getGender() {
@@ -23,20 +28,31 @@ function App() {
 				return e.target.birthDate.value.slice(2).replaceAll("-", "");
 			}
 
-			function getRandomHexByte() {
-				const array = new Uint8Array(1);
+			function getRandomNumber() {
+				const array = new Uint16Array(1);
 				crypto.getRandomValues(array);
-				return array[0].toString(16).padStart(2, "0");
+				return (array[0] % 1000).toString().padStart(3, "0");
 			}
 
 			function getCheckDigit() {
-				return "A";
+				// pierwsza wersja cyfry kontrolnej
+				const checkDigit = Number(B + C)
+					.toString()
+					.split("")
+					.map(Number)
+					.reduce((acc, curr) => acc + curr, 0);
+				return String(checkDigit % 10);
 			}
 
 			return `${A}_${B}_${C}_${D}`;
 		};
 
-		console.log(PIN());
+		const ID_NUM = () => {
+			return crypto.randomUUID();
+		};
+
+		console.log(`Wygenerowany ID: "${ID_NUM()}"`);
+		console.log(`Wygenerowany PIN: "${PIN()}"`);
 	};
 
 	// dodać walidacje w imie i nazwiso żeby nie można było dawać znaków specjalinych i numerów
